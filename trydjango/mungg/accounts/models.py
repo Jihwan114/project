@@ -20,7 +20,7 @@ class MyUserManager(BaseUserManager):
             address=address, 
             login_fail_count=login_fail_count
             )
-        user.set_password(password)
+        # user.set_password(password)
         user.save(using=self._db)
         return user
     
@@ -65,8 +65,8 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = '유저'
         verbose_name_plural = '유저'
 
-    def set_password(self, password):
-        self.password = hashlib.sha256(password).hexdigest()
+    # def set_password(self, password):
+    #     self.password = hashlib.sha256(password).hexdigest()
 
     @property
     def is_anonymous(self):
@@ -101,20 +101,20 @@ class MyUserAuth(object):
         try:
             user = get_user_model().objects.get(user_id = user_id)
         except:
-            return test
+            return None
 
         if user.login_fail_count >= 5:
             messages.info(request, '비밀번호 오류 횟수가 5회 초과 되었습니다.')
             return None
         
-        if str(user.password) == hashlib.sha256(password.encode()).hexdigest():
+        if str(user.password) == password:
             user.login_fail_count = 0
             user.save(update_fields=['login_fail_count'])
             return user
         else:
             user.login_fail_count += 1
             user.save(update_fields =['login_fail_count'])
-            return testtwo
+            return None
 
 #강아지 정보
 class Puppy(models.Model):
