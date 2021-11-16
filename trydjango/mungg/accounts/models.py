@@ -116,38 +116,38 @@ class MyUserAuth(object):
             user.save(update_fields =['login_fail_count'])
             return None
 
-#강아지 정보
-class Puppy(models.Model):
-    #이름
-    name = models.CharField(max_length=200, null=True)
-    #품종
-    kind = models.CharField(max_length=200, null=True)
-    Primary_weight = models.CharField(max_length=200, null=True)
-    gender = models.CharField(max_length=200, null=True)
-    #중성화유무
-    neutralization = models.BooleanField(default=True)
-    birth_date = models.DateTimeField (auto_now_add=True)
-    #동물ID
-    animal_id = models.CharField(max_length=200, primary_key=True)
-    user_id = models.ForeignKey(MyUser, on_delete = models.PROTECT)
+# #강아지 정보
+# class Puppy(models.Model):
+#     #이름
+#     name = models.CharField(max_length=200, null=True)
+#     #품종
+#     kind = models.CharField(max_length=200, null=True)
+#     Primary_weight = models.CharField(max_length=200, null=True)
+#     gender = models.CharField(max_length=200, null=True)
+#     #중성화유무
+#     neutralization = models.BooleanField(default=True)
+#     birth_date = models.DateTimeField (auto_now_add=True)
+#     #동물ID
+#     animal_id = models.CharField(max_length=200, primary_key=True)
+#     user_id = models.ForeignKey(MyUser, on_delete = models.PROTECT)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
-    # def counting_age(self):
-    #     import datetime 
-        # age = (datetime.date.today() - self.birth_date) / 12
+#     # def counting_age(self):
+#     #     import datetime 
+#         # age = (datetime.date.today() - self.birth_date) / 12
 
-#강아지별 몸무게
-class Puppy_Weight(models.Model):
-    #등록날짜
-    now_date = models.DateTimeField (auto_now_add=True)
-    #등록된 동물 Id
-    animal_id = models.ForeignKey(Puppy, on_delete = models.PROTECT)
-    #등록날짜기준 동물 몸무게
-    weight = models.FloatField(blank=True, default=0.0)
-    class Meta:
-        unique_together = (('now_date', 'weight'),)
+# #강아지별 몸무게
+# class Puppy_Weight(models.Model):
+#     #등록날짜
+#     now_date = models.DateTimeField (auto_now_add=True)
+#     #등록된 동물 Id
+#     animal_id = models.ForeignKey(Puppy, on_delete = models.PROTECT)
+#     #등록날짜기준 동물 몸무게
+#     weight = models.FloatField(blank=True, default=0.0)
+#     class Meta:
+#         unique_together = (('now_date', 'weight'),)
 
 
 #카테고리(품종, 연령별) 강아지 몸무게 

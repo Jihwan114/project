@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멍바디</title>
+
+   
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'vendors/iconly/bold.css' %}">
+
+    <link rel="stylesheet" href="{% static 'vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between" style="padding-left: 40px;">
+                        <div class="logo" >
+                            <a href="index.html"><img src="{% static 'images/logo/logo.png' %}" style="max-width: 150px; height: 150px; float : right;"   alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item active ">
+                            <a href="{% url 'home' %}" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+
+                        
+                        <li class="sidebar-item  ">
+                            <a href="{% url 'weight' %}" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>강아지 몸무게 체크</span>
+                            </a>
+                        </li>
+                        
+
+
+                        <li class="sidebar-item  ">
+                            <a href="{% url 'hospital' %}" class='sidebar-link'>
+                                <i class="bi-patch-minus-fill"></i>
+                                <span>주변 동물병원정보</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="{% url 'tip' %}" class='sidebar-link'>
+                                <i class="bi-calendar-date-fill"></i>
+                                <span>강아지 잘 키우는법</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="{% url 'schedule' %}" class='sidebar-link'>
+                                <i class="bi-calendar-check-fill"></i>
+                                <span>건강검진일정</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>멍바디</h3>
+                            <p class="text-subtitle text-muted">Fast Check and Comparison</p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first" >
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-end float-lg-end" >
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#logout" >Log-out</a></li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- Basic Horizontal form layout section start -->
+                <div class="page-content">
+                    <section class="row">
+                        <div class="col-12 col-lg-9">
+                            <div class="row">
+                                <div class="col-6 col-lg-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon purple">
+                                                        <i class="iconly-boldShow"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">User</h6>
+
+                                                    <h6 class="font-extrabold mb-0">
+                                                            <th>{{countingUser}}</th>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6 col-lg-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body px-3 py-4-5">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon green">
+                                                        <i class="iconly-boldAdd-User"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h6 class="text-muted font-semibold">Puppy</h6>
+                                                    <h6 class="font-extrabold mb-0">80</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            <div class="card">
+                                <div class="card-body py-4 px-5">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-xl">
+                                            <img src="{% static 'images/faces/1.jpg' %}" alt="Face 1">
+                                        </div>
+                                        <div class="ms-3 name">
+                                            <h5 class="font-bold">John Duck</h5>
+                                            <!-- <h6 class="text-muted mb-0">@johnducky</h6> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <section id="basic-horizontal-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">강아지 몸무게 변화</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <img src="{% static 'images/몸무게변화.png' %}" style="max-width: 100%; height: 100%;" alt="몸무게변화위치" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">동네 주변 동물병원 정보</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <img src="{% static 'images/지도.png' %}" style="max-width: 100%; height: 100%;" alt="지도위치" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- // Basic Horizontal form layout section end -->
+
+                <!-- // Basic multiple Column Form section start -->
+                <section id="multiple-column-form">
+                    <div class="row match-height">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form">
+                                            <div class="row">
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <button type="submit"
+                                                        class="btn btn-primary me-1 mb-1">(주)멍바디 / 대전광역시 유성구 마쯔미 라면 맛있어</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- // Basic multiple Column Form section end -->
+            </div>
+
+
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>이자리는 뭘 넣을까?</p>
+                    </div>
+                    <div class="float-end">
+                        이미지나 하나 넣을까?
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

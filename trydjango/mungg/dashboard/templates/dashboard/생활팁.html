@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멍바디</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'vendors/simple-datatables/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between"style="padding-left: 40px;">
+                        <div class="logo">
+                            <a href="index.html"><img src="{% static 'images/logo/logo.png' %}" style="max-width: 150px; height: 150px; float : right;" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item ">
+                            <a href="{% url 'home' %}" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+
+                        
+                        <li class="sidebar-item  ">
+                            <a href="{% url 'weight' %}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <span>강아지 몸무게 체크</span>
+                            </a>
+                        </li>
+
+
+
+                        <li class="sidebar-item  ">
+                            <a href="{% url 'hospital' %}" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>주변 동물병원정보</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item active  ">
+                            <a href="{% url 'tip' %}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>강아지 잘 키우는법</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="{% url 'schedule' %}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <span>건강검진일정</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>강아지 잘키우는법</h3>
+                            <p class="text-subtitle text-muted">강아지를 처음 키워보시나요? 당신께 도움을 줄거에요</p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#logout">Log-out</a></li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <section id="basic-modals">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">산책</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>You can also create a scrollable modal that allows scroll the modal body by
+                                            adding
+                                            <code>.modal-dialog-scrollable</code> to <code>.modal-dialog</code>.
+                                        </p>
+                                        <!-- Button trigger for scrolling content modal -->
+                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalScrollable">
+                                            Launch demo modal
+                                        </button>
+
+                                        <!--scrolling content Modal -->
+                                        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">
+                                                            Scrolling long
+                                                            Content</h5>
+                                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <i data-feather="x"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>
+                                                            Biscuit powder jelly beans. Lollipop candy canes croissant
+                                                            icing
+                                                            chocolate cake. Cake fruitcake
+                                                            powder pudding pastry
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy
+                                                            gummi bears pudding pie apple pie cookie. Cheesecake jujubes
+                                                            lemon drops
+                                                            danish dessert I love
+                                                            caramels powder
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah. Biscuit powder
+                                                            jelly beans.
+                                                            Lollipop candy canes
+                                                            croissant icing chocolate cake. Cake fruitcake powder
+                                                            pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah.Biscuit powder jelly
+                                                            beans.
+                                                            Lollipop candy canes croissant
+                                                            icing chocolate cake. Cake fruitcake powder pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah. Biscuit powder
+                                                            jelly beans.
+                                                            Lollipop candy canes
+                                                            croissant icing chocolate cake. Cake fruitcake powder
+                                                            pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah.
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary ml-1"
+                                                            data-bs-dismiss="modal">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block">Close</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">2번</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>You can also create a scrollable modal that allows scroll the modal body by
+                                            adding
+                                            <code>.modal-dialog-scrollable</code> to <code>.modal-dialog</code>.
+                                        </p>
+                                        <!-- Button trigger for scrolling content modal -->
+                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalScrollable">
+                                            Launch demo modal
+                                        </button>
+
+                                        <!--scrolling content Modal -->
+                                        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">
+                                                            Scrolling long
+                                                            Content</h5>
+                                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <i data-feather="x"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>
+                                                            Biscuit powder jelly beans. Lollipop candy canes croissant
+                                                            icing
+                                                            chocolate cake. Cake fruitcake
+                                                            powder pudding pastry
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy
+                                                            gummi bears pudding pie apple pie cookie. Cheesecake jujubes
+                                                            lemon drops
+                                                            danish dessert I love
+                                                            caramels powder
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah. Biscuit powder
+                                                            jelly beans.
+                                                            Lollipop candy canes
+                                                            croissant icing chocolate cake. Cake fruitcake powder
+                                                            pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah.Biscuit powder jelly
+                                                            beans.
+                                                            Lollipop candy canes croissant
+                                                            icing chocolate cake. Cake fruitcake powder pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah. Biscuit powder
+                                                            jelly beans.
+                                                            Lollipop candy canes
+                                                            croissant icing chocolate cake. Cake fruitcake powder
+                                                            pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah.
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary ml-1"
+                                                            data-bs-dismiss="modal">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block">Close</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">3번</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>You can also create a scrollable modal that allows scroll the modal body by
+                                            adding
+                                            <code>.modal-dialog-scrollable</code> to <code>.modal-dialog</code>.
+                                        </p>
+                                        <!-- Button trigger for scrolling content modal -->
+                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalScrollable">
+                                            Launch demo modal
+                                        </button>
+
+                                        <!--scrolling content Modal -->
+                                        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">
+                                                            Scrolling long
+                                                            Content</h5>
+                                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <i data-feather="x"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>
+                                                            Biscuit powder jelly beans. Lollipop candy canes croissant
+                                                            icing
+                                                            chocolate cake. Cake fruitcake
+                                                            powder pudding pastry
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy
+                                                            gummi bears pudding pie apple pie cookie. Cheesecake jujubes
+                                                            lemon drops
+                                                            danish dessert I love
+                                                            caramels powder
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah. Biscuit powder
+                                                            jelly beans.
+                                                            Lollipop candy canes
+                                                            croissant icing chocolate cake. Cake fruitcake powder
+                                                            pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah.Biscuit powder jelly
+                                                            beans.
+                                                            Lollipop candy canes croissant
+                                                            icing chocolate cake. Cake fruitcake powder pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah. Biscuit powder
+                                                            jelly beans.
+                                                            Lollipop candy canes
+                                                            croissant icing chocolate cake. Cake fruitcake powder
+                                                            pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah.
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary ml-1"
+                                                            data-bs-dismiss="modal">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block">Close</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">4번l</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>You can also create a scrollable modal that allows scroll the modal body by
+                                            adding
+                                            <code>.modal-dialog-scrollable</code> to <code>.modal-dialog</code>.
+                                        </p>
+                                        <!-- Button trigger for scrolling content modal -->
+                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalScrollable">
+                                            Launch demo modal
+                                        </button>
+
+                                        <!--scrolling content Modal -->
+                                        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">
+                                                            Scrolling long
+                                                            Content</h5>
+                                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <i data-feather="x"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>
+                                                            Biscuit powder jelly beans. Lollipop candy canes croissant
+                                                            icing
+                                                            chocolate cake. Cake fruitcake
+                                                            powder pudding pastry
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy
+                                                            gummi bears pudding pie apple pie cookie. Cheesecake jujubes
+                                                            lemon drops
+                                                            danish dessert I love
+                                                            caramels powder
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah. Biscuit powder
+                                                            jelly beans.
+                                                            Lollipop candy canes
+                                                            croissant icing chocolate cake. Cake fruitcake powder
+                                                            pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah.Biscuit powder jelly
+                                                            beans.
+                                                            Lollipop candy canes croissant
+                                                            icing chocolate cake. Cake fruitcake powder pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah. Biscuit powder
+                                                            jelly beans.
+                                                            Lollipop candy canes
+                                                            croissant icing chocolate cake. Cake fruitcake powder
+                                                            pudding pastry.
+                                                        </p>
+                                                        <p>
+                                                            Tootsie roll oat cake I love bear claw I love caramels
+                                                            caramels halvah
+                                                            chocolate bar. Cotton
+                                                            candy gummi bears pudding pie apple pie cookie. Cheesecake
+                                                            jujubes lemon
+                                                            drops danish dessert I
+                                                            love caramels powder.
+                                                        </p>
+                                                        <p>
+                                                            Chocolate cake icing tiramisu liquorice toffee donut sweet
+                                                            roll cake.
+                                                            Cupcake dessert icing
+                                                            dragée dessert. Liquorice jujubes cake tart pie donut.
+                                                            Cotton candy
+                                                            candy canes lollipop liquorice
+                                                            chocolate marzipan muffin pie liquorice.
+                                                        </p>
+                                                        <p>
+                                                            Powder cookie jelly beans sugar plum ice cream. Candy canes
+                                                            I love
+                                                            powder sugar plum tiramisu.
+                                                            Liquorice pudding chocolate cake cupcake topping biscuit.
+                                                            Lemon drops
+                                                            apple pie sesame snaps
+                                                            tootsie roll carrot cake soufflé halvah.
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary ml-1"
+                                                            data-bs-dismiss="modal">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block">Close</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>이자리는 뭘 넣을까?</p>
+                    </div>
+                    <div class="float-end">
+                        이미지나 하나 넣을까?
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

@@ -53,7 +53,7 @@ def loginPage(request):
         print(user)
         if user is not None:
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('main')
+            return redirect('home')
 
         else:
             messages.info(request, 'ID와 비밀번호가 일치하지 않습니다.')
@@ -63,10 +63,3 @@ def loginPage(request):
         return render(request, 'accounts/login.html')
 
 
-
-def main_view(request):
-    qs = Puppy.objects.all()
-    x = [x.item for x in qs]
-    y = [y.price for y in qs]
-    chart = get_plot(x,y)
-    return render(requset, 'accounts/chart.html', {'chart':chart})
