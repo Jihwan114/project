@@ -2,11 +2,15 @@ import matplotlib.pyplot as plt
 from django.shortcuts import render, redirect
 from accounts.models import *
 from django.db.models import Count
+from django.contrib import messages
 
 # Create your views here.
 # Home 화면 구성 및 유저 수 최신화 
 def home(request):
+    #메인화면 상단에 유저 숫자 나타내기 
     countingUser = MyUser.objects.count()
+    #회원인지 물어보는 팝업
+    messages.info(request, '멍바디 사용자입니까?')
 
     return render(request, 'dashboard/home.html', {'countingUser':countingUser})
 

@@ -240,6 +240,35 @@
     <script src="assets/js/pages/dashboard.js"></script>
 
     <script src="assets/js/main.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                    swal('{{message}}', {
+                        buttons: {
+                            catch: {
+                                text: "회원가입",
+                                value: "catch",
+                            },
+                            defeat: "로그인",
+                        },
+                    })
+                    .then((value) => {
+                        switch (value) {
+                            case "defeat":
+                                window.location.href = "login";
+                                break;
+                            case "catch":
+                                window.location.href = "register";
+                                break;
+                        }
+                    });
+
+            </script>
+        {% endfor %}
+    {% endif %}
+
 </body>
 
 </html>

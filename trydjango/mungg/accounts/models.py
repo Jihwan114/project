@@ -34,7 +34,7 @@ class MyUserManager(BaseUserManager):
         )
         new_superuser.is_admin = True
         #new_superuser.is_staff = True
-        #new_superuser.is_superuser = True
+        new_superuser.is_superuser = True
         new_superuser.save(using=self._db)
         return new_superuser
 

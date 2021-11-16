@@ -4,15 +4,10 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
-from accounts.models import *
+from django.contrib.auth import get_user_model
+# from accounts.models import *
 
 # Create your views here.
-
-#강아지메인홈
-def home(request):
-    return render(request, 'doghome.html')
-
-
 
 # 강아지등록
 def dogregister(request):
@@ -21,21 +16,34 @@ def dogregister(request):
         name=request.POST['name'],
         kind =request.POST['kind'],
         Primary_weight = request.POST['Primary_weight'],
-        gender = request.POST['gender'],
-        neutralization = request.POST['neutralization'],
-        birth_date = request.POST['birth_date'],
-        user_id = MyUser.objects.get('user_id')
+        #성별 입력에 따른 구분 
+        if request.POST['gender'] == "on":
+            gender = "Male"
+        else: 
+            gender = "Female"
+        #중성화여부 boolean 값 분류 
+        if request.POST['neutralization'] == "on":
+            neutralization = True
+        else:
+            neutralization = False
+        #datetimeField type 튜플, 인덱싱 
+        birth_date = request.POST['birth_date']
+        if type(birth_date) == tuple :
+            birth_date = birth_date[0]
+
+        user_id = request.GET.get('user_id')
                                         
-        dog = Puppy(
-            name=name,
-            kind=kind,
-            Primary_weight=Primary_weight,
-            gender=gender,
-            neutralization = neutralization,
-            birth_date=birth_date,
-            user_id=user_id
+        puppy = Puppy(
+                                        name=name,
+                                        kind=kind,
+                                        Primary_weight=Primary_weight,
+                                        gender=gender,
+                                        neutralization = neutralization,
+                                        birth_date=birth_date,
+                                        user_id=user_id
             )
-        dog.save()
-        # auth.login(request, user)
-        return redirect('doghome')
+        puppy.save()
+        
+        return redirect('home')
+
     return render(request, 'dogregister.html')

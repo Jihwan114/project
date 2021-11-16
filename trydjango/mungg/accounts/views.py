@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth import get_user_model, login
-from .utils import get_plot
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
+from dog.models import *
 
 # Create your views here.
 
@@ -35,7 +35,7 @@ def registerPage(request):
                 address=address,
                 login_fail_count=login_fail_count
                 )
-            messages.info(request, '등록이 완료되었습니다.')
+            messages.info(request, '사용자 등록이 완료되었습니다.')
 
             return redirect('login')
                 
@@ -53,7 +53,7 @@ def loginPage(request):
         print(user)
         if user is not None:
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('home')
+            return redirect('dogregister')
 
         else:
             messages.info(request, 'ID와 비밀번호가 일치하지 않습니다.')
