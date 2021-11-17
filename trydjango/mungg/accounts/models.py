@@ -35,7 +35,7 @@ class MyUserManager(BaseUserManager):
         new_superuser.is_admin = True
         new_superuser.is_staff = True
         new_superuser.is_active = True
-        # new_superuser.is_superuser = True
+        new_superuser.is_superuser = True
         new_superuser.save(using=self._db)
         return new_superuser
 
@@ -51,6 +51,8 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     #for admin
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     objects = MyUserManager()
 

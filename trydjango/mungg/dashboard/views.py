@@ -1,18 +1,29 @@
 import matplotlib.pyplot as plt
 from django.shortcuts import render, redirect
 from accounts.models import *
+from dog.models import *
 from django.db.models import Count
 from django.contrib import messages
 
 # Create your views here.
+
 # Home 화면 구성 및 유저 수 최신화 
 def home(request):
     #메인화면 상단에 유저 숫자 나타내기 
     countingUser = MyUser.objects.count()
+    #강아지 객체 수 생성
+    countingPuppy = Puppy.objects.count()
+    #모든 강아지
+    allPuppy = Puppy.objects.values('name')
     #회원인지 물어보는 팝업
     messages.info(request, '멍바디에 회원가입 하시겠습니까?')
 
-    return render(request, 'dashboard/home.html', {'countingUser':countingUser})
+    return render(request, 'dashboard/home.html', 
+    {'countingUser':countingUser, 
+    'countingPuppy':countingPuppy, 
+    'allPuppy':allPuppy}
+    )
+
 
 #강아지 몸무게 입력받기 
 def checktheweight(request):

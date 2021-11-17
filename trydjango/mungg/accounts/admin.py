@@ -40,7 +40,7 @@ class UserChangeForm(forms.ModelForm):
     # but replaces the password field with admin's disabled password hash display field.
 
     password = ReadOnlyPasswordHashField()
-    confirm_password = ReadOnlyPasswordHashField()
+    # confirm_password = ReadOnlyPasswordHashField()
 
     class Meta:
         model = MyUser

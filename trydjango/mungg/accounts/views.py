@@ -50,7 +50,7 @@ def loginPage(request):
         user_id = request.POST['user_id']
         password = request.POST['password']
         user = MyUserAuth().authenticate(user_id = user_id, password = password)
-        print(user)
+        # print(user)
         if user is not None:
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('dogregister')

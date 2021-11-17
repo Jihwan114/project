@@ -17,6 +17,29 @@
     <link rel="stylesheet" href="{% static 'vendors/bootstrap-icons/bootstrap-icons.css' %}">
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
     <link rel="shortcut icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+    <style>
+        select {
+       margin-bottom: 10px;
+       margin-top: 10px;
+       outline: 0;
+       background: #435EBE;
+       color: #fff;
+       padding: 4px;
+       border-radius: 6px;
+     }
+     input{
+       margin-bottom: 10px;
+       margin-top: 10px;
+       outline: 0;
+       background: #435EBE;
+       color: #fff;
+       padding: 4px;
+       border-radius: 6px;
+
+
+
+     }
+   </style>
 </head>
 
 <body>
@@ -139,7 +162,10 @@
                                                 </div>
                                                 <div class="col-md-8">
                                                     <h6 class="text-muted font-semibold">Puppy</h6>
-                                                    <h6 class="font-extrabold mb-0">80</h6>
+
+                                                    <h6 class="font-extrabold mb-0">
+                                                            <th>{{countingPuppy}}</th>
+                                                    </h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,11 +179,29 @@
                                 <div class="card-body py-4 px-5">
                                     <div class="d-flex align-items-center">
                                         <div class="avatar avatar-xl">
-                                            <img src="{% static 'images/faces/1.jpg' %}" alt="Face 1">
+                                            <img src="{% static 'images/faces/5.jpg' %}" alt="Face 5">
                                         </div>
                                         <div class="ms-3 name">
-                                            <h5 class="font-bold">John Duck</h5>
-                                            <!-- <h6 class="text-muted mb-0">@johnducky</h6> -->
+                                            <h5 class="font-bold">김다영</h5>
+                                            <h6 class="text-muted mb-0">
+                                                <div class="btn-group mb-1">
+                                                    <div class="dropdown">
+                                                        <form action="#">
+                                                            <label for="dog">강아지이름</label>
+                                                            <select name="dog" id="dog_name">
+                                                                {% for puppy in allPuppy %}
+                                                                    <option value="강아지id1">
+                                                                        {{puppy}}
+                                                                    </option>
+                                                                {% endfor %}
+                                                              <!-- <option value="강아지id1">멍멍이</option>
+                                                              <option value="강아지id2">똥개</option> -->
+                                                            </select>
+                                                            <input type="submit" value="변경" />
+                                                      </form>
+                                                    </div>
+                                                </div>  
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>
