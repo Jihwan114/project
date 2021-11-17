@@ -10,7 +10,7 @@ def home(request):
     #메인화면 상단에 유저 숫자 나타내기 
     countingUser = MyUser.objects.count()
     #회원인지 물어보는 팝업
-    messages.info(request, '멍바디 사용자입니까?')
+    messages.info(request, '멍바디에 회원가입 하시겠습니까?')
 
     return render(request, 'dashboard/home.html', {'countingUser':countingUser})
 

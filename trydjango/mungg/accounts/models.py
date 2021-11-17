@@ -33,8 +33,9 @@ class MyUserManager(BaseUserManager):
             login_fail_count=0
         )
         new_superuser.is_admin = True
-        #new_superuser.is_staff = True
-        new_superuser.is_superuser = True
+        new_superuser.is_staff = True
+        new_superuser.is_active = True
+        # new_superuser.is_superuser = True
         new_superuser.save(using=self._db)
         return new_superuser
 
