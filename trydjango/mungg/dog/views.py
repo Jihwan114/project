@@ -6,6 +6,7 @@ from .models import *
 from .forms import *
 from django.contrib.auth import get_user_model
 from django.contrib import messages
+from django.db.models import Count
 # from accounts.models import *
 
 # Create your views here.
@@ -34,27 +35,31 @@ def dogregister(request):
             birth_date = birth_date[0]
 
         주인아이디 = request.POST['user_id']
-        print(주인아이디)
-        print("**TEST1**")
+        # print(주인아이디)
+        # print("**TEST1**")
 
         user_id = MyUser.objects.get(user_id=주인아이디)
 
 
-        print(user_id)
-        print("**TEST2**")
+        # print(user_id)
+        # print("**TEST2**")
                                         
-        puppy = Puppy(
+        puppy = Puppy.create_puppy(
             name=name,
             kind=kind,
             Primary_weight=Primary_weight,
             gender=gender,
             neutralization = neutralization,
             birth_date=birth_date,
+            animal_id=name,
             user_id=user_id
             )
         puppy.save()
-        print(puppy)
-        print("**TEST3**")
+        P_COUNT = Puppy.objects.count()
+
+        # print(P_COUNT)
+        # print(puppy)
+        # print("**TEST3**")
 
         return redirect('home')
 

@@ -21,5 +21,6 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('', include('dashboard.urls')),
     path('', include('dog.urls')),
+    path('', include('weight_compare.urls')),
     # path('login/', include('accounts.urls'))
 ]

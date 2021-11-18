@@ -128,7 +128,7 @@
                 <!-- Basic Horizontal form layout section start -->
                 <div class="page-content">
                     <section class="row">
-                        <div class="col-12 col-lg-9">
+                        <div class="col-12 col-lg-8">
                             <div class="row">
                                 <div class="col-6 col-lg-3 col-md-6">
                                     <div class="card">
@@ -174,7 +174,7 @@
                                 
                             </div>
                         </div>
-                        <div class="col-12 col-lg-3">
+                        <div class="col-12 col-lg-4">
                             <div class="card">
                                 <div class="card-body py-4 px-5">
                                     <div class="d-flex align-items-center">
@@ -182,16 +182,18 @@
                                             <img src="{% static 'images/faces/5.jpg' %}" alt="Face 5">
                                         </div>
                                         <div class="ms-3 name">
-                                            <h5 class="font-bold">김다영</h5>
+                                            <h5 class="font-bold">
+                                                {{now_user_id}}
+                                            </h5>
                                             <h6 class="text-muted mb-0">
                                                 <div class="btn-group mb-1">
                                                     <div class="dropdown">
                                                         <form action="#">
                                                             <label for="dog">강아지이름</label>
                                                             <select name="dog" id="dog_name">
-                                                                {% for puppy in allPuppy %}
+                                                                {% for name in puppy_name_list_modified %}
                                                                     <option value="강아지id1">
-                                                                        {{puppy}}
+                                                                        {{name}}
                                                                     </option>
                                                                 {% endfor %}
                                                               <!-- <option value="강아지id1">멍멍이</option>

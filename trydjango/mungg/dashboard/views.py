@@ -4,6 +4,7 @@ from accounts.models import *
 from dog.models import *
 from django.db.models import Count
 from django.contrib import messages
+import datetime
 
 # Create your views here.
 
@@ -11,18 +12,48 @@ from django.contrib import messages
 def home(request):
     #메인화면 상단에 유저 숫자 나타내기 
     countingUser = MyUser.objects.count()
+
     #강아지 객체 수 생성
     countingPuppy = Puppy.objects.count()
-    #모든 강아지
-    allPuppy = Puppy.objects.values('name')
+    
+
+    #홈 화면 오른쪽 사용자 이름 표시
+    #step1. 로그인 했는지 확인 
+    if request.user.is_authenticated:
+        # print("***TEST SUCCESS***")
+        now_user_id = request.user.user_id
+
+
+    #####################################
+    ###홈 화면 오른쪽 강아지 선택 이름 생성 과정###
+    #step1.모든 강아지 객체 불러오기 
+    queryset = Puppy.objects.values()
+
+    #step2.강아지 객체에서 name 불러와서 리스트 만들기 
+    puppy_name_list = []
+    for obj in queryset:
+        puppy_name_list.append(obj.get('name'))
+    
+    #step3.불러온 강아지 이름들 특수문자 제거 
+    puppy_name_list_modified = []
+    specialcharacter = "(),\'"
+    for j in puppy_name_list:
+        for i in range(len(specialcharacter)):
+            j = j.replace(specialcharacter[i],'')
+        puppy_name_list_modified.append(j)
+    #####################################
+
+
+    
     #회원인지 물어보는 팝업
     messages.info(request, '멍바디에 회원가입 하시겠습니까?')
 
     return render(request, 'dashboard/home.html', 
-    {'countingUser':countingUser, 
-    'countingPuppy':countingPuppy, 
-    'allPuppy':allPuppy}
-    )
+                {'countingUser':countingUser, 
+                'countingPuppy':countingPuppy, 
+                'puppy_name_list_modified':puppy_name_list_modified,
+                'now_user_id':now_user_id}
+                )
 
 
 #강아지 몸무게 입력받기 

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'dashboard',
     'dog',
+    'weight_compare',
 ]
 
 MIDDLEWARE = [
