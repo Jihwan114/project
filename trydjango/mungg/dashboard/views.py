@@ -26,14 +26,14 @@ def home(request):
 
     #####################################
     ###홈 화면 오른쪽 강아지 선택 이름 생성 과정###
-    #step1.모든 강아지 객체 불러오기 
-    queryset = Puppy.objects.values()
+    #step1.로그인한 유저의 강아지 객체 불러오기 
+    queryset = Puppy.objects.filter(user_id_id=now_user_id)
 
     #step2.강아지 객체에서 name 불러와서 리스트 만들기 
     puppy_name_list = []
     for obj in queryset:
-        puppy_name_list.append(obj.get('name'))
-    
+        puppy_name_list.append(obj.name)
+        
     #step3.불러온 강아지 이름들 특수문자 제거 
     puppy_name_list_modified = []
     specialcharacter = "(),\'"
