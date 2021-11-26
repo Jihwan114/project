@@ -13,7 +13,7 @@ class MyUserManager(BaseUserManager):
         if not user_id:
             raise ValueError('user_id is required.')
 
-        user = self.model(
+        user = self.create_user(
             user_id=user_id, 
             password=password, 
             confirm_password=confirm_password,
@@ -33,7 +33,8 @@ class MyUserManager(BaseUserManager):
             login_fail_count=0
         )
         new_superuser.is_admin = True
-        new_superuser.is_staff = True
+        #new_superuser.is_staff = True
+        print("TEST")
         new_superuser.is_active = True
         new_superuser.is_superuser = True
         new_superuser.save(using=self._db)
@@ -52,7 +53,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
+    #is_staff = models.BooleanField(default=False)
 
     objects = MyUserManager()
 

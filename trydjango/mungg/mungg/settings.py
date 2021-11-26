@@ -142,6 +142,6 @@ AUTH_USER_MODEL = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    'accounts.models.MyUserAuth',
-    'django.contrib.auth.backends.ModelBackend',
+    ('accounts.models.MyUserAuth'),
+    ('django.contrib.auth.backends.ModelBackend'),
 )
