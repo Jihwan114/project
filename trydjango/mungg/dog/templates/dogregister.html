@@ -63,12 +63,15 @@
                         <div class="row row-space"> 
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">kind</label>
+                                    <label class="label">품종</label>
                                     <select name="kind">
-                                        <option value="">품종선택</option>
-                                        <option value="maltize">말티즈</option>
-                                        <option value="pudle">푸들</option>
-                                        <option value="bissong">비숑</option>
+                                        <!-- 다영 강아지 품종등록 -->
+                                        <option disabled="disabled" selected="selected">품종선택</option>
+                                        {% for dog in kinds  %}
+                                        <option value={{dog.kind}}>
+                                            {{dog.kind}}
+                                        </option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>

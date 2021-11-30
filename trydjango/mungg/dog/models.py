@@ -45,4 +45,15 @@ class Puppy(models.Model):
         
         return puppy
 
+#모든강아지 품종,평균몸무게 table
+class puppy_kind(models.Model):
+    kind = models.TextField(blank=True, null=False, primary_key=True)
+    section = models.TextField(blank=True, null=True)
+    label_3 = models.TextField(db_column='LABEL-3', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    label_4 = models.TextField(db_column='LABEL-4', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    smallavg_kg_field = models.IntegerField(db_column='smallavg(kg)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    bigavg_kg_field = models.IntegerField(db_column='bigavg(kg)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
 
+    class Meta:
+        managed = False
+        db_table = 'puppy_kind'

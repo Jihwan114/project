@@ -43,6 +43,15 @@ def home(request):
             puppy_name_list_modified.append(j)
         #####################################
 
+    #홈화면 우측 상단 선택된 강아지 정보가져오기
+    selected_puppy_name = request.GET.get('dog')
+    print(selected_puppy_name)
+    print(type(selected_puppy_name))
+    print(len(selected_puppy_name))
+
+    puppy_query = Puppy.objects.filter(name=selected_puppy_name)
+    print(puppy_query)
+
 
 
     #회원인지 물어보는 팝업 
@@ -51,7 +60,8 @@ def home(request):
                             {'countingUser':countingUser, 
                     'countingPuppy':countingPuppy, 
                     'puppy_name_list_modified':puppy_name_list_modified,
-                    'now_user_id':now_user_id}
+                    'now_user_id':now_user_id,
+                    'selected_puppy_name':selected_puppy_name}
                     )
     else:
         # messages.info(request, '멍바디에 회원가입 하시겠습니까?')
@@ -62,7 +72,6 @@ def home(request):
                     # 'now_user_id':now_user_id},
                     }
                     )
-
 
 #강아지 몸무게 입력받기 
 def checktheweight(request):

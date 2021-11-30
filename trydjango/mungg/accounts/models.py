@@ -103,9 +103,7 @@ class MyUserAuth(object):
         password = kwargs.get('password')
         try:
             user = get_user_model().objects.get(user_id = user_id)
-            print("TESTTRY")
         except:
-            print("TESTEXCEPT")
             return None
         
         if user.check_password(password):
