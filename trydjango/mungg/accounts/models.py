@@ -13,14 +13,14 @@ class MyUserManager(BaseUserManager):
         if not user_id:
             raise ValueError('user_id is required.')
 
-        user = self.create_user(
+        user = self.model(
             user_id=user_id, 
             password=password, 
             confirm_password=confirm_password,
             address=address, 
             login_fail_count=login_fail_count
             )
-        # user.set_password(password)
+        user.set_password(password)
         user.save(using=self._db)
         return user
     
@@ -33,8 +33,7 @@ class MyUserManager(BaseUserManager):
             login_fail_count=0
         )
         new_superuser.is_admin = True
-        #new_superuser.is_staff = True
-        print("TEST")
+        new_superuser.is_staff = True
         new_superuser.is_active = True
         new_superuser.is_superuser = True
         new_superuser.save(using=self._db)
@@ -53,7 +52,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    #is_staff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     objects = MyUserManager()
 
@@ -82,9 +81,9 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         # 이 함수는 기본 User model에서 사용하는 것으로, Anonymous가 아니면 로그인 된 것이므로 항상 True를 리턴
         return True
 
-    @property
-    def is_staff(self):
-        return self.is_admin
+    # @property
+    # def is_staff(self):
+    #     return self.is_admin
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -104,14 +103,12 @@ class MyUserAuth(object):
         password = kwargs.get('password')
         try:
             user = get_user_model().objects.get(user_id = user_id)
+            print("TESTTRY")
         except:
-            return None
-
-        if user.login_fail_count >= 5:
-            messages.info(request, '비밀번호 오류 횟수가 5회 초과 되었습니다.')
+            print("TESTEXCEPT")
             return None
         
-        if str(user.password) == password:
+        if user.check_password(password):
             user.login_fail_count = 0
             user.save(update_fields=['login_fail_count'])
             return user

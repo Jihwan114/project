@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'mungg.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mungg.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
@@ -143,5 +143,6 @@ AUTH_USER_MODEL = (
 
 AUTHENTICATION_BACKENDS = (
     ('accounts.models.MyUserAuth'),
+    ('django.contrib.auth.backends.RemoteUserBackend'),
     ('django.contrib.auth.backends.ModelBackend'),
 )

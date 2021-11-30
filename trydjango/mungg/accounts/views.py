@@ -78,6 +78,7 @@ def loginPage(request):
         user_id = request.POST['user_id']
         password = request.POST['password']
         user = MyUserAuth().authenticate(user_id = user_id, password = password)
+        print("TEST1")
         #user 검증
         if user is not None:
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
@@ -89,6 +90,7 @@ def loginPage(request):
                 return redirect('dogregister')
 
         else:
+            print("TEST2")
             messages.info(request, 'ID와 비밀번호가 일치하지 않습니다.')
             return render(request, 'accounts/login.html')
 
