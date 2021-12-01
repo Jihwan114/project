@@ -57,7 +57,7 @@ def dogregister(request):
         return redirect('home')
         
     #강아지 품종별 선택
-    kinds = puppy_kind.objects.all().order_by('kind')
+    kinds = PuppyKind.objects.all().order_by('kind')
     context = {'kinds':kinds}
 
     return render(request, 'dogregister.html', context)

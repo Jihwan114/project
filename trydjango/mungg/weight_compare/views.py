@@ -88,5 +88,11 @@ def compare_puppy_weight(request):
         else:
             dog_age='a'
 
+        #STEP2-2.카테고리별 최소, 최대 평균값 가져오기 
+        inner_qs_min_avg = PuppyKind.objects.filter(kind__contains = modified_p_kind)
+        min_avg = PuppyKind.objects.filter('a'__in=Subquery(inner_qs_min_avg.value('')))
+
+        print(min_avg) 
+
     return render(request, 'weight_compare/compare.html')
 
