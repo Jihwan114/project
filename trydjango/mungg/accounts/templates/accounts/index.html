@@ -87,7 +87,19 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">주소</label>
-                                    <input class="input--style-4" type="text" name="address">
+
+                                    <input class="input--style-4" onclick="sample4_execDaumPostcode()" type="text" name="address" id="우리동네">
+                                    <span id="guide" style="color:#999;display:none"></span>
+                                    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                                    <script>
+                                         function sample4_execDaumPostcode() {
+                                            new daum.Postcode({
+                                                oncomplete: function(data) {
+                                                    document.getElementById("우리동네").value = data.sido+" "+data.sigungu+" "+data.bname;
+                                                }
+                                            }).open();
+                                        }
+                                    </script>
                                 </div>
                             </div>
                         </div>

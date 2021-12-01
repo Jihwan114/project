@@ -195,6 +195,7 @@
                                             <h6 class="text-muted mb-0">
                                                 <div class="btn-group mb-1">
                                                     <div class="dropdown">
+                                                        
                                                         <form method = "get" action="">
                                                             <label for="dog">강아지이름</label>
                                                             <select name="dog" id="dog_name">
@@ -205,20 +206,20 @@
                                                                 {% endfor %}
                                                             </select>
                                                             <input type="submit" value="변경"/>
-                                                      </form>
-
-                                                      <script>
-                                                          $(document).ready(function() {
-                                                                $( "select[name=dog]").val( "{{name}}");
-                                                                $('select[name=dog]').change(function () {
-                                                                console.log($('select[name=dog]').val());
-                                                                dog = $('select[name=dog]').val();
-                                                                $('.form').submit();
-                                                            });
-                                                        }); 
-                                                      </script>
+                                                        </form>
+                                                        {% if user.is_authenticated %}
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                        $( "select[name=dog]").val( "{{name}}");
+                                                                        $('select[name=dog]').change(function () {
+                                                                        console.log($('select[name=dog]').val());
+                                                                        dog = $('select[name=dog]').val();
+                                                                        $('.form').submit();
+                                                                    });
+                                                                }); 
+                                                            </script>
+                                                        {% endif %}
                                                     </div>
-                                                    {{selected_puppy_name}}
                                                 </div>  
                                             </h6>
                                         </div>

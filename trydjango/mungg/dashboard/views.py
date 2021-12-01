@@ -21,10 +21,9 @@ def home(request):
     #step1. 로그인 했는지 확인 
     if request.user.is_authenticated:
         now_user_id = request.user.user_id
-        
 
         #####################################
-        ###홈 화면 오른쪽 강아지 선택 이름 생성 과정###
+        ##홈 화면 오른쪽 강아지 선택 리스트 생성 과정##
         #step1.로그인한 유저의 강아지 객체 불러오기 
 
         queryset = Puppy.objects.filter(user_id_id=now_user_id)
@@ -43,15 +42,15 @@ def home(request):
             puppy_name_list_modified.append(j)
         #####################################
 
-    #홈화면 우측 상단 선택된 강아지 정보가져오기
-    selected_puppy_name = request.GET.get('dog')
-    print(selected_puppy_name)
-    print(type(selected_puppy_name))
-    print(len(selected_puppy_name))
 
-    puppy_query = Puppy.objects.filter(name=selected_puppy_name)
-    print(puppy_query)
-
+    #홈화면 우측 상단 선택된 강아지 정보 가져오기
+    if request.user.is_authenticated and request.method == 'GET':
+        #home.html input value 받기 
+        selected_puppy_name = request.GET.get('dog')
+        #선택된 강아지 이름 세션값 저장
+        request.session['selected_puppy_name'] = selected_puppy_name
+        print("TEST1")
+        print(selected_puppy_name)
 
 
     #회원인지 물어보는 팝업 
@@ -61,7 +60,7 @@ def home(request):
                     'countingPuppy':countingPuppy, 
                     'puppy_name_list_modified':puppy_name_list_modified,
                     'now_user_id':now_user_id,
-                    'selected_puppy_name':selected_puppy_name}
+                    }
                     )
     else:
         # messages.info(request, '멍바디에 회원가입 하시겠습니까?')
@@ -72,6 +71,8 @@ def home(request):
                     # 'now_user_id':now_user_id},
                     }
                     )
+
+
 
 #강아지 몸무게 입력받기 
 def checktheweight(request):
