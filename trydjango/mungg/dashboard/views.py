@@ -4,6 +4,7 @@ from accounts.models import *
 from dog.models import *
 from django.db.models import Count
 from django.contrib import messages
+from weight_compare.views import *
 import datetime
 
 # Create your views here.
@@ -79,7 +80,10 @@ def checktheweight(request):
     if request.method == 'POST':
         input_puppy_weight = request.POST.get('fname')
         request.session['input_puppy_weight'] = input_puppy_weight
-        print(puppy_weight)
+        print("TEST_INPUT_WEIGHT.VIEW.DASHBOARD")
+        print(input_puppy_weight)
+        compare_puppy_weight(request)
+        return render(request, 'weight_compare/compare.html')
         
     return render(request, 'dashboard/강아지몸무게.html')
 
@@ -93,5 +97,32 @@ def well_with_puppy(request):
 
 
 def check_health_schedule(request):
-    return render(request, 'dashboard/건강검진일정.html')
+    #홈에서 사용자가 선택한 강아지 이름 가져오기 
+    selected_puppy_name = request.session.get('selected_puppy_name')
+    
+    #강아지 이름으로 선택된 강아지 쿼리 출력
+    selected_puppy_queryset = Puppy.objects.filter(name__contains = selected_puppy_name)
+    #출력된 쿼리에서 객체 출력
+    selected_puppy_object = selected_puppy_queryset[0]
+    #강아지 객체의 출생년도 출력
+    selected_puppy_b_day = selected_puppy_object.birth_date
+
+    # print(selected_puppy_b_day)
+    # print(type(selected_puppy_b_day))
+
+    #출생연도
+    puppy_b_day_year = selected_puppy_b_day.strftime('%Y')
+    #출생 월
+    puppy_b_day_month = selected_puppy_b_day.strftime('%m')
+    #출생 일 
+    puppy_b_day_date = selected_puppy_b_day.strftime('%d')
+    
+    # print(puppy_b_day_year)
+    # print(puppy_b_day_month)    
+    # print(puppy_b_day_date)
+
+    
+    return render(request, 'dashboard/건강검진일정.html', {'puppy_b_day_year':puppy_b_day_year, 
+                                                        'puppy_b_day_month':puppy_b_day_month,
+                                                        'puppy_b_day_date':puppy_b_day_date})
 
