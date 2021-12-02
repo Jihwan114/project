@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from accounts.models import *
 from dog.models import *
+from .models import *
 
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -89,10 +90,113 @@ def compare_puppy_weight(request):
             dog_age='a'
 
         #STEP2-2.카테고리별 최소, 최대 평균값 가져오기 
-        inner_qs_min_avg = PuppyKind.objects.filter(kind__contains = modified_p_kind)
-        min_avg = PuppyKind.objects.filter('a'__in=Subquery(inner_qs_min_avg.value('')))
+        #type = queryset
+        avg_queryset = Kindage.objects.filter(kind__contains = modified_p_kind, age = dog_age)
+        #type_conversion = From queryset To object
+        avg_object = avg_queryset[0]
+        
+        #최소, 최대값 변수 지정
+        selected_puppy_avg_min = avg_object.min
+        selected_puppy_avg_max = avg_object.max
 
-        print(min_avg) 
+
+        #STEP3. 사용자로부터 입력받은 현재 몸무게 가져오기 
+        user_input_puppy_weight = request.session.get('input_puppy_weight')
+
+
+        #STEP4. 
+        category_names = ['lack', 'good', 'too much']
+        results = {'pupy': [a, b-a, a]}
+
+        #STEP5.
+        labels = list(results.keys())
+        data = np.array(list(results.values()))
+        data_cum = data.cumsum(axis=1)
+        category_colors = plt.get_cmap('RdYlGn')(
+        np.linspace(0.15, 0.85, data.shape[1]))
+
+        #STEP6.
+        fig, ax = plt.subplots(figsize=(9.2, 5),facecolor=('#eafff5')) #그래프 밖 색깔지정
+        ax.yaxis.set_visible(False)
+        ax.set_xlim(0, np.sum(data, axis=1).max())
+        colo=['#1E98FD','violet','#FF00F7']  # 축 색깔 변경
+        for i, (colname, color) in enumerate(zip(category_names, category_colors)):
+            widths = data[:, i]
+            starts = data_cum[:, i] - widths
+            rects = ax.barh(labels, widths, left=starts, height=0.5,
+                            label=colname, color=colo[i])
+
+        ax.legend(ncol=len(category_names), bbox_to_anchor=(0, 1),
+                loc='lower left', fontsize='small')
+
+        #STEP7.
+        plt.axvline(x=float(input_w), color='lightgreen', linewidth=7,linestyle=(0,(5,1)))
+        ax.set_facecolor('#eafff5') #그래프내 배경색
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.spines['left'].set_visible(False)
+        ax.spines['bottom'].set_color('tab:orange')#축 색 변경
+        ax.margins(x=0,y=0.3)
+        ax.annotate('your dog',((float(input_w)+0.1),0.29),fontsize=15,color='tab:orange')
+
+        ax.tick_params(labelcolor='tab:orange',color='tab:orange')
+
+
+        #LAST_STEP
+        fig.savefig('newdog_compare33.jpg')
+
+
 
     return render(request, 'weight_compare/compare.html')
 
+
+"""
+def make_graph(animal_id,input_w):
+
+    #animal_id =>pupuy id
+    #input_w=>강아지 몸무게 현재값
+    a,b=find_dog_data(animal_id)
+    category_names = ['lack', 'good', 'too much']
+    results = {'pupy': [a, b-a, a]}
+
+
+    labels = list(results.keys())
+    data = np.array(list(results.values()))
+    data_cum = data.cumsum(axis=1)
+    category_colors = plt.get_cmap('RdYlGn')(
+        np.linspace(0.15, 0.85, data.shape[1]))
+
+    fig, ax = plt.subplots(figsize=(9.2, 5),facecolor=('#eafff5')) #그래프 밖 색깔지정
+    ax.yaxis.set_visible(False)
+    ax.set_xlim(0, np.sum(data, axis=1).max())
+    colo=['#1E98FD','violet','#FF00F7']  # 축 색깔 변경
+    for i, (colname, color) in enumerate(zip(category_names, category_colors)):
+        widths = data[:, i]
+        starts = data_cum[:, i] - widths
+        rects = ax.barh(labels, widths, left=starts, height=0.5,
+                        label=colname, color=colo[i])
+
+    ax.legend(ncol=len(category_names), bbox_to_anchor=(0, 1),
+              loc='lower left', fontsize='small')
+
+    plt.axvline(x=float(input_w), color='lightgreen', linewidth=7,linestyle=(0,(5,1)))
+    ax.set_facecolor('#eafff5') #그래프내 배경색
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.spines['bottom'].set_color('tab:orange')#축 색 변경
+    ax.margins(x=0,y=0.3)
+    ax.annotate('your dog',((float(input_w)+0.1),0.29),fontsize=15,color='tab:orange')
+
+    ax.tick_params(labelcolor='tab:orange',color='tab:orange')
+
+
+    fig.savefig('newdog_compare33.jpg')
+    # f=plt.figure()
+    # mpld3.fig_to_html(f, figid='compa'))
+    return fig, ax
+
+
+make_graph('kimjs0912',0.3)
+plt.show()
+"""

@@ -77,7 +77,8 @@ def home(request):
 #강아지 몸무게 입력받기 
 def checktheweight(request):
     if request.method == 'POST':
-        puppy_weight = request.POST.get('fname')
+        input_puppy_weight = request.POST.get('fname')
+        request.session['input_puppy_weight'] = input_puppy_weight
         print(puppy_weight)
         
     return render(request, 'dashboard/강아지몸무게.html')
