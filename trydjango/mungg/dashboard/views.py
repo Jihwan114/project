@@ -28,6 +28,7 @@ def home(request):
         #step1.로그인한 유저의 강아지 객체 불러오기 
 
         queryset = Puppy.objects.filter(user_id_id=now_user_id)
+        print(len(queryset))
 
         #step2.강아지 객체에서 name 불러와서 리스트 만들기 
         puppy_name_list = []
@@ -44,14 +45,20 @@ def home(request):
         #####################################
 
 
-    #홈화면 우측 상단 선택된 강아지 정보 가져오기
-    if request.user.is_authenticated and request.method == 'GET':
-        #home.html input value 받기 
-        selected_puppy_name = request.GET.get('dog')
-        #선택된 강아지 이름 세션값 저장
-        request.session['selected_puppy_name'] = selected_puppy_name
-        print("TEST1")
-        print(selected_puppy_name)
+        #홈화면 우측 상단 선택된 강아지 정보 가져오기
+        #사용자가 등록한 강아지가 1마리인 경우
+        if len(queryset) == 1:
+                selected_puppy_name = puppy_name_list[0]
+                request.session['selected_puppy_name'] = selected_puppy_name
+        #사용자가 등록한 강아지가 2마리 이상인 경우
+        else:
+            if request.user.is_authenticated and request.method == 'GET':
+                #home.html input value 받기 
+                selected_puppy_name = request.GET.get('dog')
+                #선택된 강아지 이름 세션값 저장
+                request.session['selected_puppy_name'] = selected_puppy_name
+                print("TEST1")
+                print(selected_puppy_name)
 
 
     #회원인지 물어보는 팝업 
@@ -82,7 +89,11 @@ def checktheweight(request):
         request.session['input_puppy_weight'] = input_puppy_weight
         print("TEST_INPUT_WEIGHT.VIEW.DASHBOARD")
         print(input_puppy_weight)
+        #현재 몸무게 평균 비교하는 그래프
         compare_puppy_weight(request)
+        #몸무게 테이블에 입력된 몸무게 누적 
+        weightregister(request)
+        make_graph_weight(request)
         return render(request, 'weight_compare/compare.html')
         
     return render(request, 'dashboard/강아지몸무게.html')

@@ -11,6 +11,32 @@ import matplotlib.dates as mdate
 import numpy as np
 
 
+def weightregister(request):  #다영이
+    if request.user.is_authenticated:
+
+        ##STEP0. 로그인 사용자가 선택한 강이지 이름 세션값 가져오기 
+        selected_puppy_name = request.session.get('selected_puppy_name')
+        print("TEST2")
+        print(type(selected_puppy_name))
+        selected_puppy_queryset = Puppy.objects.filter(name__contains=selected_puppy_name)
+        print(selected_puppy_queryset)
+        selected_puppy_object = selected_puppy_queryset[0]
+        selected_puppy_animal_id = selected_puppy_object.animal_id
+
+        if request.method == 'POST':
+            puppy=selected_puppy_object
+            date=datetime.datetime.now().date(),
+            weight = request.POST['fname'],
+            # print(weight)
+            #개별몸무게객체 생성
+            nowweight = IndiWeight.create_weight(
+                puppy=selected_puppy_object,
+                date=date,
+                weight=float(weight[0]),
+                )
+
+
+
 def compare_puppy_weight(request):
 
     #사용자가 로그인했는지 확인
@@ -166,3 +192,70 @@ def compare_puppy_weight(request):
 
 
     return render(request, 'weight_compare/compare.html')
+
+
+
+
+def make_graph_weight(request):
+    list=[]
+    selected_puppy_name = request.session.get('selected_puppy_name')
+    print(selected_puppy_name)
+    selected_puppy_queryset = Puppy.objects.filter(name=selected_puppy_name)
+    selected_weight=IndiWeight.objects.filter(puppy=selected_puppy_queryset[0])
+    # print(selected_weight)
+
+    xdate=[]
+    ydata=[]
+
+    for x in selected_weight:
+        xdate.append(x.date)
+        ydata.append(x.weight)
+
+    print(xdate)
+    print(ydata)
+
+
+    xlims = mdate.date2num([xdate[0], xdate[-1]])
+    _, yv = np.meshgrid(np.linspace(0,1,210), np.linspace(0,1,90))
+
+
+    fig, ax = plt.subplots(figsize=(9.2,5),facecolor=('#eafff5'))
+
+    ax.plot(xdate, ydata, color='fuchsia',linewidth=4,alpha=0.4, label = 'My Strategy')
+    extent = [xlims[0], xlims[1], 0, 1.4*max(ydata)]
+    ax.imshow(yv, cmap=mpl.cm.RdPu, origin='lower',alpha = 0.5, aspect = 'auto',
+              extent = [xlims[0], xlims[1], 0, max(ydata)])
+    ax.fill_between(xdate, ydata, max(ydata), color='#eafff5')
+    ax.set_facecolor('#eafff5')
+    plt.yticks(color = 'gray')
+    plt.xticks(color = 'gray',rotation = 15)
+    plt.ylim(0,1.4*max(ydata))
+    fontdict = {"family":"Times New Roman", 'size':12, 'color':'gray'} #Times New Roman, Arial
+    # plt.title("Dog Wight ", fontdict = fontdict) 제목
+    # plt.xlabel("date(day)", fontdict = fontdict)
+    # plt.ylabel("Weight", fontdict = fontdict)
+
+    # 축이름 변경
+    ax.spines['top'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_color('lightgray')
+    #축위치설정
+    ax.xaxis.set_major_formatter(mdate.DateFormatter('%Y-%m-%d'))
+
+
+    # timedelta = (xdate[-1] - xdate[0]) / 10
+    # plt.xticks(mdate.drange(xdate[0], xdate[-1], timedelta))
+    # 分成 10 份
+    delta = round(len(xdate) / 9)
+    # plt.xticks([xdate[i*delta] for i in range(9)] + [xdate[-1]])#x 축 범위 정하기
+
+    # plt.yticks(np.linspace(min(ydata), max(ydata), 5))  #y축 범위정하기
+    plt.tick_params(left = 'off')
+    plt.tick_params(which = 'major', direction = 'out', width = 0.2, length = 5) # in, out or inout
+
+    plt.grid(axis = 'y', color = 'lightgray', linestyle = '-', linewidth = 0.5)
+
+    # plt.legend(loc = 'best', fontsize = 12, frameon=False, ncol = 1)
+    fig.savefig('/Users/jihwanseok/Desktop/project/trydjango/mungg/weight_compare/static/accumulate_img/weight12.jpg')
+    plt.show()

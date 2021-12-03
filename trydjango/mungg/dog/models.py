@@ -15,19 +15,19 @@ class Puppy(models.Model):
     name = models.CharField(max_length=200, null=True)
     #품종
     kind = models.CharField(max_length=200, null=True)
-    Primary_weight = models.CharField(max_length=200, null=True)
+    Primary_weight = models.FloatField(null=True)
     gender = models.CharField(max_length=200, null=True)
     #중성화유무
     neutralization = models.BooleanField(default=True)
     birth_date = models.DateTimeField (default=now, editable=True)
     #동물ID
-    animal_id = models.CharField(max_length=200, primary_key=True)
+    animal_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
 
-    def create_puppy(name, kind, Primary_weight, gender, neutralization, birth_date, animal_id, user_id):
+    def create_puppy(name, kind, Primary_weight, gender, neutralization, birth_date, user_id):
         if not name:
             raise ValueError('name is required.')
         
@@ -38,7 +38,7 @@ class Puppy(models.Model):
             gender=gender,
             neutralization=neutralization,
             birth_date=birth_date,
-            animal_id=animal_id,
+            #animal_id=animal_id,
             user_id=user_id
         )
         puppy.save()

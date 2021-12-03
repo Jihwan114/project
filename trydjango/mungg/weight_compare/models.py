@@ -1,4 +1,5 @@
 from django.db import models
+from dog.models import * 
 
 # Create your models here.
 
@@ -12,3 +13,20 @@ class Kindage(models.Model):
     class Meta:
         managed = False
         db_table = 'kindage'
+
+
+class IndiWeight(models.Model):
+    puppy= models.ForeignKey(Puppy, on_delete=models.CASCADE, null=True)
+    date=models.DateField(auto_now=True)
+    weight=models.FloatField(null=True)
+
+    def create_weight(puppy, date, weight):
+
+        weight = IndiWeight(
+            puppy=puppy,
+            date=datetime.now().date(),
+            weight=weight,
+        )
+        weight.save()
+        
+        return IndiWeight
